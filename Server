@@ -1,0 +1,28 @@
+from flask import Flask
+form flask.ext.mysqldb import MySQL
+
+app=Flask(__name__)
+app.config['MYSQL_HOST']='localhost'
+app.config['MYSQL_USER']='root'
+app.config['MYSQL_PASSWORD']='1234'
+app.config['MYSQL_DB']='Sturec'
+
+mysql=MySQL(app)
+
+@app.route("/all")
+def displayall():
+	cur=mysql.connection.cursor()
+	cur.execute('''SELECT * FROM sturecord''')
+	rv=cur.fetchall()
+	return str(rv)
+
+
+@app.route('/late')
+def late():
+	cur=mysql.connection.cursor()
+	cur.execute('''SELECT RFID_ID FROM exrecord where Is_Out=True''')
+	rv=cur.fetchall()
+	return str(rv)
+
+if __name__=='__main__':
+	app.run(debug=True)
