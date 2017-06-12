@@ -1,0 +1,25 @@
+import mysql.connector
+
+cnx = mysql.connector.connect(user='root', password='1234',
+                              host='127.0.0.1',
+                              database='exrecords')
+cursor = cnx.cursor()
+cnx.close()
+
+
+from __future__ import print_function
+from datetime import date, datetime, timedelta
+import mysql.connector
+
+
+time = datetime.now()
+
+cursor.execute(("INSERT INTO employees "
+               "(RFID_ID,Time) "
+               "VALUES (%s, %s, %s, %s, %s)"), (UID, time))
+emp_no = cursor.lastrowid
+
+cnx.commit()
+
+cursor.close()
+cnx.close()
