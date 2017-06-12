@@ -1,0 +1,11 @@
+raspi-config
+sudo nano /boot/config.txtdtparam=spi=on
+sudo reboot
+lsmod | grep spi
+sudo apt-get install python2.7-dev
+git clone https://github.com/lthiery/SPI-Py.gitcd SPI-Pysudo python setup.py install
+
+git clone https://github.com/mxgxw/MFRC522-python.git
+
+cd MFRC522-python
+python Read.py
